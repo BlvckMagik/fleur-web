@@ -1,0 +1,69 @@
+# Fleur — Квітковий магазин (Next.js)
+
+## Проєкт
+
+Сайт квіткового магазину "Fleur" — витончений, елегантний вебсайт у пастельно-рожевих тонах із scroll-анімаціями та сучасним UI.
+
+## Технології
+
+- **Next.js 16** (App Router, Server Components за замовчуванням)
+- **React 19**
+- **TypeScript** (strict mode)
+- **MUI v7** (@mui/material + @emotion/react + @emotion/styled)
+- **Framer Motion** (анімації, scroll-triggered анімації)
+- **Swiper** (слайдери/каруселі)
+- **pnpm** (пакетний менеджер)
+
+## Архітектура — Feature-Sliced Design (FSD)
+
+```
+src/
+├── app/              # Next.js App Router — routing, layouts, pages
+├── widgets/          # Великі самостійні блоки UI (Header, Footer, HeroSlider, etc.)
+├── features/         # Бізнес-фічі (ProductFilter, etc.)
+├── entities/         # Бізнес-сутності (Product, Service, Portfolio)
+└── shared/           # Спільне (theme, UI-компоненти, lib, config)
+    ├── theme/        # MUI тема, ThemeProvider
+    ├── ui/           # Переваживані UI-компоненти (AnimatedSection, SectionTitle, etc.)
+    ├── lib/          # Утиліти, хуки (animations, useScrollAnimation)
+    └── config/       # Конфігурація, моки даних (navigation, products, services, portfolio)
+```
+
+### Правила FSD:
+- Кожен шар може імпортувати лише з нижніх шарів: `app → widgets → features → entities → shared`
+- Зворотні імпорти заборонені
+- Кожен модуль має barrel export (`index.ts`)
+- Іменовані експорти (named exports) замість default exports (окрім pages в app/)
+
+## Стилізація
+
+- **Палітра:** пастельно-рожеві тони (#F4A0B5, #C48B9F, #FFF5F7, #4A3035)
+- **Шрифт заголовків:** Cormorant Garamond (CSS var: `--font-heading`)
+- **Шрифт тіла:** Raleway (CSS var: `--font-body`)
+- Стилізація через MUI `sx` prop та emotion
+- Не використовувати Tailwind CSS для стилів — лише MUI/emotion
+- Border radius: 12-16px для компонентів
+
+## Конвенції коду
+
+- Відповідай українською мовою
+- Не залишай коментарі в коді
+- Компоненти: PascalCase (ProductCard.tsx)
+- Директорії: kebab-case (hero-slider/)
+- Хуки: camelCase з префіксом "use" (useScrollAnimation)
+- Типи: PascalCase (ProductCategory, PortfolioItem)
+- Server Components де можливо, "use client" лише для інтерактивності
+- Використовуй `@/` alias для імпортів
+
+## Анімації
+
+- Scroll-анімації через Framer Motion + useInView
+- Варіанти: fadeInUp, fadeInLeft, fadeInRight, scaleIn, staggerContainer
+- Обгортка AnimatedSection для секцій з анімацією
+- Swiper для слайдерів з EffectFade та Autoplay
+
+## Команди
+
+- `pnpm dev` — розробка
+- `pnpm build` — збірка
+- `pnpm lint` — лінтинг
