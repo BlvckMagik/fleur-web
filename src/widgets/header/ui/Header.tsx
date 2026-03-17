@@ -34,30 +34,45 @@ export const Header = () => {
 
   return (
     <>
-      <AppBar
-        position="fixed"
-        elevation={0}
+      <Box
         sx={{
-          bgcolor: scrolled
-            ? "rgba(255,245,247,0.95)"
-            : "rgba(255,245,247,0.85)",
-          backdropFilter: "blur(12px)",
-          transition: "all 0.4s ease",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
           zIndex: 1300,
-          boxShadow: scrolled ? "0 2px 20px rgba(196,139,159,0.12)" : "none",
+          px: { xs: 1.5, md: 2.5 },
+          pt: { xs: 1, md: 1.5 },
+          transition: "padding 0.4s ease",
         }}
       >
-        <Toolbar
+        <AppBar
+          position="static"
+          elevation={0}
           sx={{
-            maxWidth: 1200,
-            width: "100%",
-            mx: "auto",
-            px: { xs: 2, md: 4 },
-            height: { xs: 60, md: scrolled ? 60 : 70 },
-            transition: "height 0.4s ease",
-            minHeight: "unset !important",
+            bgcolor: scrolled
+              ? "rgba(255,245,247,0.95)"
+              : "rgba(255,245,247,0.85)",
+            backdropFilter: "blur(12px)",
+            transition: "all 0.4s ease",
+            borderRadius: { xs: "16px", md: "20px" },
+            boxShadow: scrolled
+              ? "0 4px 24px rgba(196,139,159,0.18)"
+              : "0 2px 12px rgba(196,139,159,0.08)",
+            border: "1px solid rgba(212,112,138,0.1)",
           }}
         >
+          <Toolbar
+            sx={{
+              maxWidth: 1200,
+              width: "100%",
+              mx: "auto",
+              px: { xs: 2, md: 4 },
+              height: { xs: 56, md: scrolled ? 56 : 64 },
+              transition: "height 0.4s ease",
+              minHeight: "unset !important",
+            }}
+          >
           <Link
             href="/"
             style={{
@@ -156,7 +171,8 @@ export const Header = () => {
             <MenuIcon />
           </IconButton>
         </Toolbar>
-      </AppBar>
+        </AppBar>
+      </Box>
 
       <Drawer
         anchor="right"
@@ -225,10 +241,9 @@ export const Header = () => {
         </List>
       </Drawer>
 
-      <Toolbar
+      <Box
         sx={{
-          height: { xs: 60, md: 70 },
-          minHeight: "unset !important",
+          height: { xs: 72, md: 84 },
         }}
       />
     </>
